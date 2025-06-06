@@ -13,7 +13,7 @@ namespace Nobi.UiRoundedCorners {
 		private Material material;
 		private Vector4 outerUV = new Vector4(0, 0, 1, 1);
 
-		[HideInInspector, SerializeField] private MaskableGraphic image;
+		private MaskableGraphic image;
 
 		private void OnValidate() {
 			Validate();
@@ -44,7 +44,7 @@ namespace Nobi.UiRoundedCorners {
 		}
 
 		private void OnRectTransformDimensionsChange() {
-			if (enabled && material != null) {
+			if (isActiveAndEnabled && material != null) {
 				Refresh();
 			}
 		}

@@ -24,8 +24,8 @@ namespace Nobi.UiRoundedCorners {
 
 		// xy - position,
 		// zw - halfSize
-		[HideInInspector, SerializeField] private Vector4 rect2props;
-		[HideInInspector, SerializeField] private MaskableGraphic image;
+		private Vector4 rect2props;
+		private MaskableGraphic image;
 
 		private void OnValidate() {
 			Validate();
@@ -46,7 +46,7 @@ namespace Nobi.UiRoundedCorners {
 		}
 
 		private void OnRectTransformDimensionsChange() {
-			if (enabled && material != null) {
+			if (isActiveAndEnabled && material != null) {
 				Refresh();
 			}
 		}
