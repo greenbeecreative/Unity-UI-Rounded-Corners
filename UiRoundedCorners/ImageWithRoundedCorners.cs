@@ -21,8 +21,8 @@ namespace Nobi.UiRoundedCorners {
 		}
 
 		private void OnDestroy() {
-			if (image != null) {
-				image.material = null;      //This makes so that when the component is removed, the UI material returns to null
+			if (image != null && image.material == material) {
+				image.material = null;
 			}
 
 			DestroyHelper.Destroy(material);
@@ -52,6 +52,7 @@ namespace Nobi.UiRoundedCorners {
 		public void Validate() {
 			if (material == null) {
 				material = new Material(Shader.Find("UI/RoundedCorners/RoundedCorners"));
+				material.hideFlags = HideFlags.DontSave;
 			}
 
 			if (image == null) {
@@ -74,6 +75,10 @@ namespace Nobi.UiRoundedCorners {
 			//Right now, the ImageWithIndependentRoundedCorners appears to have double the radius than this.
 			material.SetVector(Props, new Vector4(rect.width, rect.height, radius * 2, 0));
 			material.SetVector(prop_OuterUV, outerUV);
+			
+			if (image != null) {
+				image.SetMaterialDirty();
+			}
 		}
 	}
 }
