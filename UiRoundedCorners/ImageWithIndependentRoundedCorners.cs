@@ -13,6 +13,8 @@ namespace Nobi.UiRoundedCorners {
 		private static readonly int prop_rect2props = Shader.PropertyToID("_rect2props");
 		private static readonly int prop_OuterUV = Shader.PropertyToID("_OuterUV");
 
+		private static Shader MaterialShader;
+
 		// Vector2.right rotated clockwise by 45 degrees
 		private static readonly Vector2 wNorm = new Vector2(.7071068f, -.7071068f);
 		// Vector2.right rotated counter-clockwise by 45 degrees
@@ -62,8 +64,14 @@ namespace Nobi.UiRoundedCorners {
 		}
 
 		public void Validate() {
-			if (material == null) {
-				material = new Material(Shader.Find("UI/RoundedCorners/IndependentRoundedCorners"));
+			if (MaterialShader == null)
+			{
+				MaterialShader = Shader.Find("UI/RoundedCorners/IndependentRoundedCorners");
+			}
+
+			if (material == null)
+			{
+				material = new Material(MaterialShader);
 				material.hideFlags = HideFlags.DontSave;
 			}
 
